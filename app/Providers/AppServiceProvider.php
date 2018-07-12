@@ -31,10 +31,10 @@ class AppServiceProvider extends ServiceProvider
             return new CurrencyRepository(CurrencyGenerator::generate());
         });
 
-        $this->app->bind(Currency::class, function ($app, array $parameters) {
-            return new Currency($parameters['id'], $parameters['name'], $parameters['short_name'],
-                $parameters['actual_course'], $parameters['actual_course_date'],
-                $parameters['active']);
-        });
+//        $this->app->bind(Currency::class, function ($app, array $parameters) {
+//            return new Currency($parameters['id'], $parameters['name'], $parameters['short_name'],
+//                $parameters['actual_course'], $parameters['actual_course_date'],
+//                $parameters['active']);
+//        });
     }
 }

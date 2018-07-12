@@ -42,10 +42,12 @@ class CurrencyController extends Controller
         $maxId = end($currencies)->getId();
 
         $data = $request->post();
-        $currency = app(Currency::class, ['id' => ++$maxId, 'name' =>
-            $data['name'], 'short_name' => $data['short_name'], 'actual_course' =>
-            $data['actual_course'], 'actual_course_date' =>
-            $data['actual_course_date'], 'active' => $data['active']]);
+        $currency = new Currency(++$maxId, $data['name'], $data['short_name'], $data['actual_course'],
+            $data['actual_course_date'], $data['active']);
+//        $currency = app(Currency::class, ['id' => ++$maxId, 'name' =>
+//            $data['name'], 'short_name' => $data['short_name'], 'actual_course' =>
+//            $data['actual_course'], 'actual_course_date' =>
+//            $data['actual_course_date'], 'active' => $data['active']]);
         $this->repository->save($currency);
         return response()->json($data);
     }
@@ -57,10 +59,12 @@ class CurrencyController extends Controller
             $currency = CurrencyPresenter::present($currency);
             $data = $request->all();
             $currency = array_merge($currency, $data);
-            $currency = app(Currency::class, ['id' => $currency['id'], 'name' =>
-                $currency['name'], 'short_name' => $currency['short_name'], 'actual_course' =>
-                $currency['actual_course'], 'actual_course_date' =>
-                $currency['actual_course_date'], 'active' => $currency['active']]);
+            $currency = new Currency($currency['id'], $currency['name'], $currency['short_name'], $currency['actual_course'],
+                $currency['actual_course_date'], $currency['active']);
+//            $currency = app(Currency::class, ['id' => $currency['id'], 'name' =>
+//                $currency['name'], 'short_name' => $currency['short_name'], 'actual_course' =>
+//                $currency['actual_course'], 'actual_course_date' =>
+//                $currency['actual_course_date'], 'active' => $currency['active']]);
             $this->repository->save($currency);
             return response()->json(CurrencyPresenter::present($currency));
         } else {
