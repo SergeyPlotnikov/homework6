@@ -33,10 +33,9 @@ Route::middleware('api')->get('/currencies/{id}', function (int $id) {
     if ($currency !== null) {
         return response()->json(\App\Services\CurrencyPresenter::present($currency));
     } else {
-        abort(404, 'Currency doesn\'t exist with id = ' . $id);
+        return response()->json("Currency with id = ${id} doesn't exist", 404);
     }
 });
-
 
 
 Route::middleware('api')->resource('/admin/currencies', 'CurrencyController',

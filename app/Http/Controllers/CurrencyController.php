@@ -31,7 +31,7 @@ class CurrencyController extends Controller
         if ($currency !== null) {
             return response()->json(CurrencyPresenter::present($currency));
         } else {
-            abort(404, 'Currency doesn\'t exist with id = ' . $id);
+            return response()->json("Currency with id = ${id} doesn't exist", 404);
         }
     }
 
@@ -68,7 +68,7 @@ class CurrencyController extends Controller
             $this->repository->save($currency);
             return response()->json(CurrencyPresenter::present($currency));
         } else {
-            abort(404, 'Currency doesn\'t exist with id = ' . $id);
+            return response()->json("Currency with id = ${id} doesn't exist", 404);
         }
     }
 
@@ -79,14 +79,13 @@ class CurrencyController extends Controller
             $this->repository->delete($currency);
             return response('Currency was removed!');
         } else {
-            abort(404, 'Currency doesn\'t exist with id = ' . $id);
+            return response()->json("Currency with id = ${id} doesn't exist", 404);
         }
     }
 
     public function showCurrencies()
     {
         $currencies = $this->repository->findAll();
-//        dd($currencies);
         return view('render_currencies', ['currencies' => $currencies]);
     }
 }
