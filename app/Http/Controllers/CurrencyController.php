@@ -78,4 +78,11 @@ class CurrencyController extends Controller
             abort(404, 'Currency doesn\'t exist with id = ' . $id);
         }
     }
+
+    public function showCurrencies()
+    {
+        $currencies = $this->repository->findAll();
+//        dd($currencies);
+        return view('render_currencies', ['currencies' => $currencies]);
+    }
 }
